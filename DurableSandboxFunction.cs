@@ -38,6 +38,7 @@ namespace DurableFunctionsSandbox
 
             // オーケストレーター内で30秒待機させる TODO: 30秒間隔でTriggerを発火させたい。
             //await context.CreateTimer(context.CurrentUtcDateTime.AddSeconds(30), CancellationToken.None);
+
             // Replace "hello" with the name of your Durable Activity Function.
             outputs.Add(await context.CallActivityAsync<string>("DurableSandboxFunction_Hello", "Tokyo"));
             outputs.Add(await context.CallActivityAsync<string>("DurableSandboxFunction_Hello", "Seattle"));
