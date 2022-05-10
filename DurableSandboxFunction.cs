@@ -12,7 +12,7 @@ namespace DurableFunctionsSandbox
 {
     public class DurableSandboxFunction
     {
-        [FunctionName("DurableSandboxFunction_HttpStart")]
+        [FunctionName("DurableSandboxFunction_QueueStart")]
         public async Task Run(
         [QueueTrigger("sandbox-myqueue-items", Connection = "StorageConnectionString")] string myQueueItem,
         [DurableClient] IDurableOrchestrationClient starter,
@@ -37,8 +37,7 @@ namespace DurableFunctionsSandbox
             var outputs = new List<string>();
 
             // オーケストレーター内で30秒待機させる TODO: 30秒間隔でTriggerを発火させたい。
-            await context.CreateTimer(context.CurrentUtcDateTime.AddSeconds(30), CancellationToken.None);
-
+            //await context.CreateTimer(context.CurrentUtcDateTime.AddSeconds(30), CancellationToken.None);
             // Replace "hello" with the name of your Durable Activity Function.
             outputs.Add(await context.CallActivityAsync<string>("DurableSandboxFunction_Hello", "Tokyo"));
             outputs.Add(await context.CallActivityAsync<string>("DurableSandboxFunction_Hello", "Seattle"));
